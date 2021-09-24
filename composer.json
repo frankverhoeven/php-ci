@@ -5,7 +5,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "MyOnlineStore\\DevTools\\": "src/",
+            "MyOnlineStore\\DevTools\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "MyOnlineStore\\DevTools\\Tests\\": "tests/"
         }
     },
