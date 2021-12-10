@@ -11,8 +11,7 @@ use Symfony\Component\Process\Process;
 
 abstract class DevToolsCommand extends Command
 {
-    /** @var Configuration */
-    protected $configuration;
+    protected Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {
@@ -27,7 +26,11 @@ abstract class DevToolsCommand extends Command
             \array_merge(
                 $this->getCommand(),
                 (array) ($input->getArguments()['args'] ?? [])
-            )
+            ),
+            null,
+            null,
+            null,
+            null
         );
         $process->start();
 
@@ -40,13 +43,15 @@ abstract class DevToolsCommand extends Command
 
     protected function withBinPath(string $command): string
     {
+        return $this->configuration->getRootDir() . 'bin/' . $command;
+    }
+
+    protected function withVendorBinPath(string $command): string
+    {
         return $this->configuration->getRootDir() . 'vendor/bin/' . $command;
     }
 
-    /**
-     * @return list<string>
-     */
-    abstract public static function getPossibleConfigurationFiles(): array;
+    abstract public static function isAvailable(Configuration $configuration): bool;
 
     /**
      * @return list<string>

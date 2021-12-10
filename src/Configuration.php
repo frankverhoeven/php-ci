@@ -9,7 +9,6 @@ use MyOnlineStore\DevTools\Command\DevToolsCommand;
 final class Configuration
 {
     private const PHP_VERSIONS = [
-        '7.2',
         '7.4',
         '8.0',
         '8.1',
@@ -21,8 +20,7 @@ final class Configuration
     /** @var list<string>|null */
     private $phpVersions;
 
-    /** @var string */
-    private $rootDir;
+    private string $rootDir;
 
     public function __construct()
     {
@@ -49,7 +47,12 @@ final class Configuration
     private function gatherPhpVersions(): array
     {
         /** @var array<array-key, mixed> $composer */
-        $composer = \json_decode(\file_get_contents($this->rootDir . 'composer.json'), true);
+        $composer = \json_decode(
+            \file_get_contents($this->rootDir . 'composer.json'),
+            true,
+            512,
+            \JSON_THROW_ON_ERROR
+        );
 
         if (!isset($composer['require']['php'])) {
             throw new \RuntimeException('Required PHP version not specified in composer.json');
@@ -94,19 +97,17 @@ final class Configuration
         $enabledTools = [];
 
         foreach ($this->gatherAvailableCommands() as $command) {
-            foreach ($command::getPossibleConfigurationFiles() as $configurationFile) {
-                if (!\is_file($this->rootDir . $configurationFile)) {
-                    continue;
-                }
-
-                $commandName = $command::getDefaultName();
-
-                if (!\is_string($commandName)) {
-                    throw new \RuntimeException(\sprintf('Command "%s" has not configured a name', $command));
-                }
-
-                $enabledTools[$commandName] = $command;
+            if (!$command::isAvailable($this)) {
+                continue;
             }
+
+            $commandName = $command::getDefaultName();
+
+            if (!\is_string($commandName)) {
+                throw new \RuntimeException(\sprintf('Command "%s" has not configured a name', $command));
+            }
+
+            $enabledTools[$commandName] = $command;
         }
 
         return $enabledTools;
