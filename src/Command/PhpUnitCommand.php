@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Process\Process;
 
 final class PhpUnitCommand extends DevToolsCommand
 {
@@ -13,14 +15,12 @@ final class PhpUnitCommand extends DevToolsCommand
     /** @var string|null */
     protected static $defaultDescription = 'PHP Unit';
 
-    /**
-     * @inheritDoc
-     */
-    protected function getCommand(): array
+    protected function getProcess(InputInterface $input): Process
     {
-        return [
-            $this->withVendorBinPath('phpunit'),
-        ];
+        return new Process(
+            [$this->withVendorBinPath('phpunit')],
+            timeout: null,
+        );
     }
 
     public static function isAvailable(Configuration $configuration): bool
