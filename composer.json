@@ -28,9 +28,11 @@
     "require-dev": {
         "myonlinestore/coding-standard": "^3.1",
         "phpunit/phpunit": "^8.5 || ^9.5",
-        "roave/infection-static-analysis-plugin": "^1.18",
+        "roave/infection-static-analysis-plugin": "^1.19",
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "^4.22"
+        "vimeo/psalm": "^4.23",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-phpunit": "^1.1"
     },
     "bin": [
         "bin/devtools"

@@ -10,6 +10,7 @@ use MyOnlineStore\DevTools\Command\LintSymfonyContainerCommand;
 use MyOnlineStore\DevTools\Command\LintYamlCommand;
 use MyOnlineStore\DevTools\Command\ListPhpVersionsCommand;
 use MyOnlineStore\DevTools\Command\ListToolsCommand;
+use MyOnlineStore\DevTools\Command\PhpStanCommand;
 use MyOnlineStore\DevTools\Command\PhpUnitCommand;
 use MyOnlineStore\DevTools\Command\PsalmCommand;
 use MyOnlineStore\DevTools\Command\RoaveInfectionCommand;
@@ -35,6 +36,7 @@ final class DevTools
             new LintYamlCommand($this->configuration),
             new ListToolsCommand($this->configuration),
             new ListPhpVersionsCommand($this->configuration),
+            new PhpStanCommand($this->configuration),
             new PhpUnitCommand($this->configuration),
             new PsalmCommand($this->configuration),
             new RoaveInfectionCommand($this->configuration),

@@ -96,15 +96,18 @@ final class Configuration
      */
     private function gatherPhpVersions(): array
     {
-        /** @var array<array-key, mixed> $composer */
-        $composer = \json_decode(
-            \file_get_contents($this->rootDir . 'composer.json'),
-            true,
-            512,
-            \JSON_THROW_ON_ERROR
-        );
+        if (false === $composerJson = \file_get_contents($this->rootDir . 'composer.json')) {
+            throw new \RuntimeException('Unable to read "composer.json"');
+        }
 
-        if (!isset($composer['require']['php'])) {
+        /** @var array<array-key, mixed> $composer */
+        $composer = \json_decode($composerJson, true, 512, \JSON_THROW_ON_ERROR);
+
+        if (
+            !isset($composer['require'])
+            || !\is_array($composer['require'])
+            || !isset($composer['require']['php'])
+        ) {
             throw new \RuntimeException('Required PHP version not specified in composer.json');
         }
 
