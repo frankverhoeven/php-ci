@@ -33,10 +33,11 @@ final class RoaveInfectionCommand extends DevToolsCommand
 
     public static function isAvailable(Configuration $configuration): bool
     {
-        return \is_file($configuration->getRootDir() . 'vendor/bin/roave-infection-static-analysis-plugin')
-            && (
-                \is_file($configuration->getRootDir() . 'infection.json.dist') ||
-                \is_file($configuration->getRootDir() . 'infection.json')
-            );
+        if (!\is_file($configuration->getRootDir() . 'vendor/bin/roave-infection-static-analysis-plugin')) {
+            return false;
+        }
+
+        return \is_file($configuration->getRootDir() . 'infection.json.dist')
+            || \is_file($configuration->getRootDir() . 'infection.json');
     }
 }

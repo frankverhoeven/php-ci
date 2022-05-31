@@ -39,6 +39,10 @@ final class CodesnifferCommand extends DevToolsCommand
 
     public static function isAvailable(Configuration $configuration): bool
     {
+        if (!\is_file($configuration->getRootDir() . 'vendor/bin/phpcs')) {
+            return false;
+        }
+
         return \is_file($configuration->getRootDir() . 'phpcs.xml.dist')
             || \is_file($configuration->getRootDir() . 'phpcs.xml');
     }

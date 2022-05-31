@@ -30,6 +30,10 @@ final class PhpStanCommand extends DevToolsCommand
 
     public static function isAvailable(Configuration $configuration): bool
     {
+        if (!\is_file($configuration->getRootDir() . 'vendor/bin/phpstan')) {
+            return false;
+        }
+
         return \is_file($configuration->getRootDir() . 'phpstan.neon.dist')
             || \is_file($configuration->getRootDir() . 'phpstan.neon');
     }

@@ -31,6 +31,10 @@ final class PsalmCommand extends DevToolsCommand
 
     public static function isAvailable(Configuration $configuration): bool
     {
+        if (!\is_file($configuration->getRootDir() . 'vendor/bin/psalm')) {
+            return false;
+        }
+
         return \is_file($configuration->getRootDir() . 'psalm.xml.dist')
             || \is_file($configuration->getRootDir() . 'psalm.xml');
     }

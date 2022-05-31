@@ -25,6 +25,10 @@ final class PhpUnitCommand extends DevToolsCommand
 
     public static function isAvailable(Configuration $configuration): bool
     {
+        if (!\is_file($configuration->getRootDir() . 'vendor/bin/phpunit')) {
+            return false;
+        }
+
         return \is_file($configuration->getRootDir() . 'phpunit.xml.dist')
             || \is_file($configuration->getRootDir() . 'phpunit.xml');
     }
