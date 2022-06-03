@@ -8,15 +8,17 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
-#[AsCommand('lint-container', 'Lint Symfony container')]
-final class LintSymfonyContainerCommand extends DevToolsCommand
+#[AsCommand('doctrine-validate-schema', 'Doctrine schema validation')]
+final class DoctrineValidateSchemaCommand extends DevToolsCommand
 {
     protected function getProcess(InputInterface $input): Process
     {
         return new Process(
             [
                 $this->withBinPath('console'),
-                'lint:container',
+                'doctrine:schema:validate',
+                '--skip-sync',
+                '--no-interaction',
             ],
             timeout: null,
         );
@@ -31,6 +33,6 @@ final class LintSymfonyContainerCommand extends DevToolsCommand
         $process = new Process([$configuration->getRootDir() . 'bin/console', 'list']);
         $process->run();
 
-        return \str_contains($process->getOutput(), 'lint:container');
+        return \str_contains($process->getOutput(), 'doctrine:schema:validate');
     }
 }

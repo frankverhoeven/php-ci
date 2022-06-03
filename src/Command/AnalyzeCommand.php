@@ -4,18 +4,14 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand('analyze', 'Run all enabled tools.')]
 final class AnalyzeCommand extends Command
 {
-    /** @var string|null */
-    protected static $defaultName = 'analyze';
-
-    /** @var string|null */
-    protected static $defaultDescription = 'Run all enabled tools.';
-
     public function __construct(
         private Configuration $configuration,
     ) {

@@ -4,17 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
+#[AsCommand('phpstan', 'PHPStan')]
 final class PhpStanCommand extends DevToolsCommand
 {
-    /** @var string|null */
-    protected static $defaultName = 'phpstan';
-
-    /** @var string|null */
-    protected static $defaultDescription = 'PHPStan';
-
     protected function getProcess(InputInterface $input): Process
     {
         $command = [

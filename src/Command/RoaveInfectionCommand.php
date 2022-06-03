@@ -4,17 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
+#[AsCommand('infection', 'Roave Infection')]
 final class RoaveInfectionCommand extends DevToolsCommand
 {
-    /** @var string|null */
-    protected static $defaultName = 'infection';
-
-    /** @var string|null */
-    protected static $defaultDescription = 'Roave Infection';
-
     protected function getProcess(InputInterface $input): Process
     {
         $command = [

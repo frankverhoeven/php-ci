@@ -4,17 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
+#[AsCommand('codesniffer', 'PHP_CodeSniffer')]
 final class CodesnifferCommand extends DevToolsCommand
 {
-    /** @var string|null */
-    protected static $defaultName = 'codesniffer';
-
-    /** @var string|null */
-    protected static $defaultDescription = 'PHP_CodeSniffer';
-
     protected function getProcess(InputInterface $input): Process
     {
         if ($this->isGitHubFormat($input)) {

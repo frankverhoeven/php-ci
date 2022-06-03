@@ -6,6 +6,7 @@ namespace MyOnlineStore\DevTools;
 use MyOnlineStore\DevTools\Command\AnalyzeCommand;
 use MyOnlineStore\DevTools\Command\CodesnifferCommand;
 use MyOnlineStore\DevTools\Command\DoctrineMigrationsCommand;
+use MyOnlineStore\DevTools\Command\DoctrineValidateSchemaCommand;
 use MyOnlineStore\DevTools\Command\LintSymfonyContainerCommand;
 use MyOnlineStore\DevTools\Command\LintYamlCommand;
 use MyOnlineStore\DevTools\Command\ListPhpVersionsCommand;
@@ -32,6 +33,7 @@ final class DevTools
             new AnalyzeCommand($this->configuration),
             new CodesnifferCommand($this->configuration),
             new DoctrineMigrationsCommand($this->configuration),
+            new DoctrineValidateSchemaCommand($this->configuration),
             new LintSymfonyContainerCommand($this->configuration),
             new LintYamlCommand($this->configuration),
             new ListToolsCommand($this->configuration),

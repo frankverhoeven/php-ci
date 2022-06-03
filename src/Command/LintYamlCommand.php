@@ -4,17 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
+#[AsCommand('lint-yaml', 'Lint YAML')]
 final class LintYamlCommand extends DevToolsCommand
 {
-    /** @var string|null */
-    protected static $defaultName = 'lint-yaml';
-
-    /** @var string|null */
-    protected static $defaultDescription = 'Lint YAML';
-
     protected function getProcess(InputInterface $input): Process
     {
         return new Process(

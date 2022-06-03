@@ -4,16 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\DevTools\Command;
 
 use MyOnlineStore\DevTools\Configuration;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
+#[AsCommand('doctrine-migrations', 'Doctrine Migrations, always runs in test environment')]
 final class DoctrineMigrationsCommand extends DevToolsCommand
 {
-    /** @var string|null */
-    protected static $defaultName = 'doctrine-migrations';
-    /** @var string|null */
-    protected static $defaultDescription = 'Doctrine Migrations, always runs in test environment';
-
     /**
      * @inheritDoc
      */
@@ -59,10 +56,7 @@ final class DoctrineMigrationsCommand extends DevToolsCommand
 
     public static function isAvailable(Configuration $configuration): bool
     {
-        if (
-            !\is_file($configuration->getRootDir() . 'bin/console') ||
-            !\is_dir($configuration->getRootDir() . 'config')
-        ) {
+        if (!\is_file($configuration->getRootDir() . 'bin/console')) {
             return false;
         }
 
