@@ -15,13 +15,13 @@ final class Configuration
     ];
 
     /** @var array<string, class-string<DevToolsCommand>>|null */
-    private ?array $enabledTools = null;
+    private array|null $enabledTools = null;
 
     /** @var list<string>|null */
-    private ?array $phpVersions = null;
+    private array|null $phpVersions = null;
 
     private string $rootDir;
-    private ?string $threads = null;
+    private string|null $threads = null;
 
     public function __construct()
     {
@@ -42,9 +42,7 @@ final class Configuration
         throw new \RuntimeException('Unable to determine project root');
     }
 
-    /**
-     * @return array<string, class-string<DevToolsCommand>>
-     */
+    /** @return array<string, class-string<DevToolsCommand>> */
     public function getEnabledTools(): array
     {
         if (null === $this->enabledTools) {
@@ -54,9 +52,7 @@ final class Configuration
         return $this->enabledTools;
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     public function getPhpVersions(): array
     {
         if (null === $this->phpVersions) {
@@ -87,13 +83,11 @@ final class Configuration
                 'Linux' => Process::fromShellCommandline('nproc')->mustRun()->getOutput(),
                 'Darwin' => Process::fromShellCommandline('sysctl -n hw.logicalcpu')->mustRun()->getOutput(),
                 default => '2',
-            }
+            },
         );
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     private function gatherPhpVersions(): array
     {
         if (false === $composerJson = \file_get_contents($this->rootDir . 'composer.json')) {
@@ -124,9 +118,7 @@ final class Configuration
         return $versions;
     }
 
-    /**
-     * @return list<class-string<DevToolsCommand>>
-     */
+    /** @return list<class-string<DevToolsCommand>> */
     private function gatherAvailableCommands(): array
     {
         $commands = [];
@@ -142,9 +134,7 @@ final class Configuration
         return $commands;
     }
 
-    /**
-     * @return array<string, class-string<DevToolsCommand>>
-     */
+    /** @return array<string, class-string<DevToolsCommand>> */
     private function gatherEnabledTools(): array
     {
         $enabledTools = [];

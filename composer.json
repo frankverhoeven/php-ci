@@ -26,13 +26,15 @@
         "symfony/process": "^5.4 || ^6.0"
     },
     "require-dev": {
-        "myonlinestore/coding-standard": "^3.1",
+        "myonlinestore/coding-standard": "dev-doctrine-cs-10",
+        "doctrine/coding-standard": "10.0.x-dev",
         "phpunit/phpunit": "^9.5",
         "roave/infection-static-analysis-plugin": "^1.19",
         "roave/security-advisories": "dev-latest",
         "vimeo/psalm": "^4.23",
         "phpstan/phpstan": "^1.7",
-        "phpstan/phpstan-phpunit": "^1.1"
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phparkitect/phparkitect": "^0.2.21"
     },
     "bin": [
         "bin/devtools"

@@ -11,6 +11,7 @@ use MyOnlineStore\DevTools\Command\LintSymfonyContainerCommand;
 use MyOnlineStore\DevTools\Command\LintYamlCommand;
 use MyOnlineStore\DevTools\Command\ListPhpVersionsCommand;
 use MyOnlineStore\DevTools\Command\ListToolsCommand;
+use MyOnlineStore\DevTools\Command\PhpArkitectCommand;
 use MyOnlineStore\DevTools\Command\PhpStanCommand;
 use MyOnlineStore\DevTools\Command\PhpUnitCommand;
 use MyOnlineStore\DevTools\Command\PsalmCommand;
@@ -27,7 +28,7 @@ final class DevToolsTest extends TestCase
     protected function setUp(): void
     {
         $this->devTools = new DevTools(
-            $this->configuration = new Configuration()
+            $this->configuration = new Configuration(),
         );
     }
 
@@ -43,12 +44,13 @@ final class DevToolsTest extends TestCase
                 new LintYamlCommand($this->configuration),
                 new ListToolsCommand($this->configuration),
                 new ListPhpVersionsCommand($this->configuration),
+                new PhpArkitectCommand($this->configuration),
                 new PhpStanCommand($this->configuration),
                 new PhpUnitCommand($this->configuration),
                 new PsalmCommand($this->configuration),
                 new RoaveInfectionCommand($this->configuration),
             ],
-            $this->devTools->getCommands()
+            $this->devTools->getCommands(),
         );
     }
 

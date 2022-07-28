@@ -24,7 +24,7 @@ abstract class DevToolsCommand extends Command
             'format',
             null,
             InputOption::VALUE_OPTIONAL,
-            'Output format to use (by supported commands).'
+            'Output format to use (by supported commands).',
         );
     }
 
@@ -44,7 +44,7 @@ abstract class DevToolsCommand extends Command
             $exitCode |= $process->wait(
                 static function (string $_type, string $buffer) use ($output): void {
                     $output->write($buffer);
-                }
+                },
             );
         }
 
@@ -56,9 +56,7 @@ abstract class DevToolsCommand extends Command
         throw new \RuntimeException('Either implement getProcess() or getMultiProcess()');
     }
 
-    /**
-     * @return list<Process>
-     */
+    /** @return list<Process> */
     protected function getMultiProcess(InputInterface $input): array
     {
         return [];
