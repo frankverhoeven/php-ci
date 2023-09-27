@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\DevTools\Command;
+namespace FrankVerhoeven\CI\Command;
 
-use MyOnlineStore\DevTools\Configuration;
+use FrankVerhoeven\CI\Configuration;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

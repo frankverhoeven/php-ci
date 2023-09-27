@@ -1,21 +1,24 @@
 name: Test
 
-on: push
+on:
+    push:
+        branches-ignore:
+            - main
 
 jobs:
     setup:
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
             -   uses: shivammathur/setup-php@v2
                 with:
                     php-version: 8.2
                     coverage: none
             -   uses: ramsey/composer-install@v2
             -   id: set-php-versions
-                run: echo "::set-output name=php-versions::$(bin/devtools list:php-versions)"
+                run: echo "::set-output name=php-versions::$(bin/ci list:php-versions)"
             -   id: set-tools
-                run: echo "::set-output name=tools::$(bin/devtools list:enabled-tools)"
+                run: echo "::set-output name=tools::$(bin/ci list:enabled-tools)"
         outputs:
             php-versions: ${{ steps.set-php-versions.outputs.php-versions }}
             tools: ${{ steps.set-tools.outputs.tools }}
@@ -30,7 +33,7 @@ jobs:
             fail-fast: false
         name: ${{ matrix.php-version }} - ${{ matrix.tool }}
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
             -   uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-version }}
@@ -39,4 +42,4 @@ jobs:
             -   run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
             -   run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-            -   run: bin/devtools ${{ matrix.tool }} --format=github
+            -   run: bin/ci ${{ matrix.tool }} --format=github

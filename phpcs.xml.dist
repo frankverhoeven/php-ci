@@ -12,5 +12,5 @@
     <file>src</file>
     <file>tests</file>
 
-    <rule ref="MyOnlineStore"/>
+    <rule ref="FrankVerhoeven"/>
 </ruleset>
