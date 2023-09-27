@@ -13,7 +13,7 @@ return static function (Config $config): void {
     $srcClassSet = ClassSet::fromDir(__DIR__ . '/src');
 
     $commandNamingRule = Rule::allClasses()
-        ->that(new ResideInOneOfTheseNamespaces('MyOnlineStore\DevTools\Command'))
+        ->that(new ResideInOneOfTheseNamespaces('FrankVerhoeven\CI\Command'))
         ->should(new HaveNameMatching('*Command'))
         ->because('we want uniform naming for console commands');
 

@@ -27,7 +27,7 @@ final class Configuration
     public function __construct()
     {
         $possibleRoots = [
-            __DIR__ . '/../../../../',  // From vendor/FrankVerhoeven/php-CI/bin
+            __DIR__ . '/../../../../',  // From vendor/frankverhoeven/php-ci/bin
             __DIR__ . '/../../',        // From vendor/bin
             __DIR__ . '/../',           // From bin
         ];
