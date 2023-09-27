@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\DevTools\Command;
+namespace FrankVerhoeven\CI\Command;
 
-use MyOnlineStore\DevTools\Configuration;
+use FrankVerhoeven\CI\Configuration;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
 #[AsCommand('doctrine-migrations', 'Doctrine Migrations, always runs in test environment')]
-final class DoctrineMigrationsCommand extends DevToolsCommand
+final class DoctrineMigrationsCommand extends CICommand
 {
     /** @inheritDoc */
     protected function getMultiProcess(InputInterface $input): array

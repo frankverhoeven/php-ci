@@ -2,12 +2,12 @@
 <?php
 declare(strict_types=1);
 
-use MyOnlineStore\DevTools\Configuration;
-use MyOnlineStore\DevTools\DevTools;
+use FrankVerhoeven\CI\Configuration;
+use FrankVerhoeven\CI\CI;
 use Symfony\Component\Console\Application;
 
 $autoloadLocations = [
-    __DIR__ . '/../../../autoload.php',     // From vendor/myonlinestore/php-devtools/bin
+    __DIR__ . '/../../../autoload.php',     // From vendor/frankverhoeven/php-ci/bin
     __DIR__ . '/../autoload.php',           // From vendor/bin
     __DIR__ . '/../vendor/autoload.php',    // From bin
 ];
@@ -20,9 +20,9 @@ foreach ($autoloadLocations as $location) {
     }
 }
 
-$devTools = new DevTools(new Configuration());
+$ci = new CI(new Configuration());
 
-$application = new Application('MyOnlineStore PHP Dev Tools');
-$application->addCommands($devTools->getCommands());
+$application = new Application('FrankVerhoeven PHP CI Tools');
+$application->addCommands($ci->getCommands());
 $application->setDefaultCommand('analyze');
 $application->run();

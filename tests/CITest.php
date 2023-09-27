@@ -1,33 +1,33 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\DevTools\Tests;
+namespace FrankVerhoeven\CI\Tests;
 
-use MyOnlineStore\DevTools\Command\AnalyzeCommand;
-use MyOnlineStore\DevTools\Command\CodesnifferCommand;
-use MyOnlineStore\DevTools\Command\DoctrineMigrationsCommand;
-use MyOnlineStore\DevTools\Command\DoctrineValidateSchemaCommand;
-use MyOnlineStore\DevTools\Command\LintSymfonyContainerCommand;
-use MyOnlineStore\DevTools\Command\LintYamlCommand;
-use MyOnlineStore\DevTools\Command\ListPhpVersionsCommand;
-use MyOnlineStore\DevTools\Command\ListToolsCommand;
-use MyOnlineStore\DevTools\Command\PhpArkitectCommand;
-use MyOnlineStore\DevTools\Command\PhpStanCommand;
-use MyOnlineStore\DevTools\Command\PhpUnitCommand;
-use MyOnlineStore\DevTools\Command\PsalmCommand;
-use MyOnlineStore\DevTools\Command\RoaveInfectionCommand;
-use MyOnlineStore\DevTools\Configuration;
-use MyOnlineStore\DevTools\DevTools;
+use FrankVerhoeven\CI\CI;
+use FrankVerhoeven\CI\Command\AnalyzeCommand;
+use FrankVerhoeven\CI\Command\CodesnifferCommand;
+use FrankVerhoeven\CI\Command\DoctrineMigrationsCommand;
+use FrankVerhoeven\CI\Command\DoctrineValidateSchemaCommand;
+use FrankVerhoeven\CI\Command\LintSymfonyContainerCommand;
+use FrankVerhoeven\CI\Command\LintYamlCommand;
+use FrankVerhoeven\CI\Command\ListPhpVersionsCommand;
+use FrankVerhoeven\CI\Command\ListToolsCommand;
+use FrankVerhoeven\CI\Command\PhpArkitectCommand;
+use FrankVerhoeven\CI\Command\PhpStanCommand;
+use FrankVerhoeven\CI\Command\PhpUnitCommand;
+use FrankVerhoeven\CI\Command\PsalmCommand;
+use FrankVerhoeven\CI\Command\RoaveInfectionCommand;
+use FrankVerhoeven\CI\Configuration;
 use PHPUnit\Framework\TestCase;
 
-final class DevToolsTest extends TestCase
+final class CITest extends TestCase
 {
     private Configuration $configuration;
-    private DevTools $devTools;
+    private CI $CI;
 
     protected function setUp(): void
     {
-        $this->devTools = new DevTools(
+        $this->CI = new CI(
             $this->configuration = new Configuration(),
         );
     }
@@ -50,14 +50,14 @@ final class DevToolsTest extends TestCase
                 new PsalmCommand($this->configuration),
                 new RoaveInfectionCommand($this->configuration),
             ],
-            $this->devTools->getCommands(),
+            $this->CI->getCommands(),
         );
     }
 
     public function testListPhpVersion(): void
     {
         \chdir(\dirname(__DIR__));
-        $phpVersions = \exec('./bin/devtools list:php-versions');
+        $phpVersions = \exec('./bin/ci list:php-versions');
 
         self::assertIsString($phpVersions);
         self::assertStringContainsString(\PHP_MAJOR_VERSION . '.' . \PHP_MINOR_VERSION, $phpVersions);

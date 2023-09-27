@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\DevTools;
+namespace FrankVerhoeven\CI;
 
-use MyOnlineStore\DevTools\Command\AnalyzeCommand;
-use MyOnlineStore\DevTools\Command\CodesnifferCommand;
-use MyOnlineStore\DevTools\Command\DoctrineMigrationsCommand;
-use MyOnlineStore\DevTools\Command\DoctrineValidateSchemaCommand;
-use MyOnlineStore\DevTools\Command\LintSymfonyContainerCommand;
-use MyOnlineStore\DevTools\Command\LintYamlCommand;
-use MyOnlineStore\DevTools\Command\ListPhpVersionsCommand;
-use MyOnlineStore\DevTools\Command\ListToolsCommand;
-use MyOnlineStore\DevTools\Command\PhpArkitectCommand;
-use MyOnlineStore\DevTools\Command\PhpStanCommand;
-use MyOnlineStore\DevTools\Command\PhpUnitCommand;
-use MyOnlineStore\DevTools\Command\PsalmCommand;
-use MyOnlineStore\DevTools\Command\RoaveInfectionCommand;
+use FrankVerhoeven\CI\Command\AnalyzeCommand;
+use FrankVerhoeven\CI\Command\CodesnifferCommand;
+use FrankVerhoeven\CI\Command\DoctrineMigrationsCommand;
+use FrankVerhoeven\CI\Command\DoctrineValidateSchemaCommand;
+use FrankVerhoeven\CI\Command\LintSymfonyContainerCommand;
+use FrankVerhoeven\CI\Command\LintYamlCommand;
+use FrankVerhoeven\CI\Command\ListPhpVersionsCommand;
+use FrankVerhoeven\CI\Command\ListToolsCommand;
+use FrankVerhoeven\CI\Command\PhpArkitectCommand;
+use FrankVerhoeven\CI\Command\PhpStanCommand;
+use FrankVerhoeven\CI\Command\PhpUnitCommand;
+use FrankVerhoeven\CI\Command\PsalmCommand;
+use FrankVerhoeven\CI\Command\RoaveInfectionCommand;
 use Symfony\Component\Console\Command\Command;
 
-final class DevTools
+final class CI
 {
     public function __construct(
         private Configuration $configuration,

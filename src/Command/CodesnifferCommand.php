@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\DevTools\Command;
+namespace FrankVerhoeven\CI\Command;
 
-use MyOnlineStore\DevTools\Configuration;
+use FrankVerhoeven\CI\Configuration;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
 #[AsCommand('codesniffer', 'PHP_CodeSniffer')]
-final class CodesnifferCommand extends DevToolsCommand
+final class CodesnifferCommand extends CICommand
 {
     protected function getProcess(InputInterface $input): Process
     {

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\DevTools;
+namespace FrankVerhoeven\CI;
 
 use Composer\Semver\Semver;
-use MyOnlineStore\DevTools\Command\DevToolsCommand;
+use FrankVerhoeven\CI\Command\CICommand;
 use Symfony\Component\Process\Process;
 
 final class Configuration
@@ -14,20 +14,20 @@ final class Configuration
         '8.2',
     ];
 
-    /** @var array<string, class-string<DevToolsCommand>>|null */
-    private array | null $enabledTools = null;
+    /** @var array<string, class-string<CICommand>>|null */
+    private array|null $enabledTools = null;
 
     /** @var list<string>|null */
-    private array | null $phpVersions = null;
+    private array|null $phpVersions = null;
 
     private string $rootDir;
-    private string | null $workingDir = null;
-    private string | null $threads = null;
+    private string|null $workingDir = null;
+    private string|null $threads = null;
 
     public function __construct()
     {
         $possibleRoots = [
-            __DIR__ . '/../../../../',  // From vendor/myonlinestore/php-devtools/bin
+            __DIR__ . '/../../../../',  // From vendor/frankverhoeven/php-ci/bin
             __DIR__ . '/../../',        // From vendor/bin
             __DIR__ . '/../',           // From bin
         ];
@@ -48,7 +48,7 @@ final class Configuration
         $this->workingDir = $this->rootDir . \trim($workingDir, '/') . '/';
     }
 
-    /** @return array<string, class-string<DevToolsCommand>> */
+    /** @return array<string, class-string<CICommand>> */
     public function getEnabledTools(): array
     {
         if (null === $this->enabledTools) {
@@ -129,13 +129,13 @@ final class Configuration
         return $versions;
     }
 
-    /** @return list<class-string<DevToolsCommand>> */
+    /** @return list<class-string<CICommand>> */
     private function gatherAvailableCommands(): array
     {
         $commands = [];
 
         foreach (\get_declared_classes() as $class) {
-            if (!\is_subclass_of($class, DevToolsCommand::class)) {
+            if (!\is_subclass_of($class, CICommand::class)) {
                 continue;
             }
 
@@ -145,7 +145,7 @@ final class Configuration
         return $commands;
     }
 
-    /** @return array<string, class-string<DevToolsCommand>> */
+    /** @return array<string, class-string<CICommand>> */
     private function gatherEnabledTools(): array
     {
         $enabledTools = [];
