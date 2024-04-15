@@ -13,9 +13,9 @@ jobs:
                     coverage: none
             -   uses: ramsey/composer-install@v2
             -   id: set-php-versions
-                run: echo "::set-output name=php-versions::$(bin/ci list:php-versions)"
+                run: echo "php-versions=$(bin/ci list:php-versions)" >> $GITHUB_OUTPUT
             -   id: set-tools
-                run: echo "::set-output name=tools::$(bin/ci list:enabled-tools)"
+                run: echo "tools=$(bin/ci list:enabled-tools)" >> $GITHUB_OUTPUT
         outputs:
             php-versions: ${{ steps.set-php-versions.outputs.php-versions }}
             tools: ${{ steps.set-tools.outputs.tools }}
@@ -28,7 +28,7 @@ jobs:
                 php-version: ${{ fromJson(needs.setup.outputs.php-versions) }}
                 tool: ${{ fromJson(needs.setup.outputs.tools) }}
             fail-fast: false
-        name: ${{ matrix.php-version }} - ${{ matrix.tool }}
+        name: '${{ matrix.php-version }} - ${{ matrix.tool }}'
         steps:
             -   uses: actions/checkout@v4
             -   uses: shivammathur/setup-php@v2
