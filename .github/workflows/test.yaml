@@ -31,7 +31,7 @@ jobs:
                     - highest
                     - lowest
             fail-fast: false
-        name: '${{ matrix.php-version }} - ${{ matrix.tool }} - ${{ matrix.php-version }}'
+        name: '${{ matrix.php-version }} - ${{ matrix.tool }} - ${{ matrix.dependency-versions }}'
         steps:
             -   uses: actions/checkout@v4
             -   uses: shivammathur/setup-php@v2
