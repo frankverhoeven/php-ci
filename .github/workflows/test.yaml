@@ -11,7 +11,7 @@ jobs:
                 with:
                     php-version: 8.2
                     coverage: none
-            -   uses: ramsey/composer-install@v2
+            -   uses: ramsey/composer-install@v3
             -   id: set-php-versions
                 run: echo "php-versions=$(bin/ci list:php-versions)" >> $GITHUB_OUTPUT
             -   id: set-tools
@@ -35,7 +35,7 @@ jobs:
                 with:
                     php-version: ${{ matrix.php-version }}
                     tools: cs2pr
-            -   uses: ramsey/composer-install@v2
+            -   uses: ramsey/composer-install@v3
             -   run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
             -   run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
