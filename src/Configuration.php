@@ -10,7 +10,6 @@ use Symfony\Component\Process\Process;
 final class Configuration
 {
     private const PHP_VERSIONS = [
-        '8.1',
         '8.2',
         '8.3',
     ];
