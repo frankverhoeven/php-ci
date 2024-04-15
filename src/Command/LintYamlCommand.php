@@ -27,8 +27,8 @@ final class LintYamlCommand extends CICommand
     public static function isAvailable(Configuration $configuration): bool
     {
         if (
-            !\is_file($configuration->getWorkingDir() . 'bin/console') ||
-            !\is_dir($configuration->getWorkingDir() . 'config')
+            !\is_file($configuration->getWorkingDir() . 'bin/console')
+            || !\is_dir($configuration->getWorkingDir() . 'config')
         ) {
             return false;
         }

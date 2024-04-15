@@ -11,7 +11,7 @@ use Symfony\Component\Process\Process;
 #[AsCommand('doctrine-migrations', 'Doctrine Migrations, always runs in test environment')]
 final class DoctrineMigrationsCommand extends CICommand
 {
-    /** @inheritDoc */
+    /** @return list<Process> */
     protected function getMultiProcess(InputInterface $input): array
     {
         return [
