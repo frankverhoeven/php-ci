@@ -8,15 +8,13 @@ use FrankVerhoeven\CI\Command\AnalyzeCommand;
 use FrankVerhoeven\CI\Command\CodesnifferCommand;
 use FrankVerhoeven\CI\Command\DoctrineMigrationsCommand;
 use FrankVerhoeven\CI\Command\DoctrineValidateSchemaCommand;
+use FrankVerhoeven\CI\Command\InfectionCommand;
 use FrankVerhoeven\CI\Command\LintSymfonyContainerCommand;
 use FrankVerhoeven\CI\Command\LintYamlCommand;
 use FrankVerhoeven\CI\Command\ListPhpVersionsCommand;
 use FrankVerhoeven\CI\Command\ListToolsCommand;
-use FrankVerhoeven\CI\Command\PhpArkitectCommand;
 use FrankVerhoeven\CI\Command\PhpStanCommand;
 use FrankVerhoeven\CI\Command\PhpUnitCommand;
-use FrankVerhoeven\CI\Command\PsalmCommand;
-use FrankVerhoeven\CI\Command\RoaveInfectionCommand;
 use FrankVerhoeven\CI\Configuration;
 use PHPUnit\Framework\TestCase;
 
@@ -44,11 +42,9 @@ final class CITest extends TestCase
                 new LintYamlCommand($this->configuration),
                 new ListToolsCommand($this->configuration),
                 new ListPhpVersionsCommand($this->configuration),
-                new PhpArkitectCommand($this->configuration),
                 new PhpStanCommand($this->configuration),
                 new PhpUnitCommand($this->configuration),
-                new PsalmCommand($this->configuration),
-                new RoaveInfectionCommand($this->configuration),
+                new InfectionCommand($this->configuration),
             ],
             $this->CI->getCommands(),
         );

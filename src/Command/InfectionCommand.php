@@ -8,30 +8,32 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Process\Process;
 
-#[AsCommand('psalm', 'Psalm')]
-final class PsalmCommand extends CICommand
+#[AsCommand('infection', 'Roave Infection')]
+final class InfectionCommand extends CICommand
 {
     protected function getProcess(InputInterface $input): Process
     {
         $command = [
-            $this->withVendorBinPath('psalm'),
+            $this->withVendorBinPath('infection'),
             '--threads=' . $this->configuration->getThreads(),
+            '--only-covered',
+            '--show-mutations',
         ];
 
         if ($this->isGitHubFormat($input)) {
-            $command[] = '--output-format=github';
+            $command[] = '--logger-github';
         }
 
-        return new Process($command, timeout: null);
+        return new Process($command, env: ['XDEBUG_MODE' => 'coverage'], timeout: null);
     }
 
     public static function isAvailable(Configuration $configuration): bool
     {
-        if (!\is_file($configuration->getRootDir() . 'vendor/bin/psalm')) {
+        if (!\is_file($configuration->getRootDir() . 'vendor/bin/infection')) {
             return false;
         }
 
-        return \is_file($configuration->getWorkingDir() . 'psalm.xml.dist')
-            || \is_file($configuration->getWorkingDir() . 'psalm.xml');
+        return \is_file($configuration->getWorkingDir() . 'infection.json.dist')
+            || \is_file($configuration->getWorkingDir() . 'infection.json');
     }
 }
